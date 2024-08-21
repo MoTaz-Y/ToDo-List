@@ -1,10 +1,9 @@
 import "./App.css";
+import TaskForm from "./assets/components/TaskForm";
 const App = () => {
   return (
     <div className="app">
-      <header className="App-header">
-        <h1>To Do App</h1>
-      </header>
+      <TaskForm />
 
       <main className="app-main">
         <section className="task-column">Section 1</section>
