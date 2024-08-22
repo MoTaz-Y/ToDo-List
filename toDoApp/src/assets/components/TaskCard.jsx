@@ -12,7 +12,13 @@ import { Box, Tooltip } from "@mui/material";
 import Tag from "./Tag";
 import PropTypes from "prop-types";
 
-const TaskCard = ({ task, status }) => {
+const TaskCard = ({
+  task,
+  status,
+  handleDelete,
+  handleStatusChange,
+  index,
+}) => {
   return (
     <Card
       sx={{
@@ -36,26 +42,41 @@ const TaskCard = ({ task, status }) => {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="body2">
           {task.tags.map((tag) => (
-            <Tag key={tag} tagName={tag} />
+            <Tag key={tag} tagName={tag} selectTag />
           ))}
         </Typography>
         <CardActions>
           <Tooltip title="Doing">
-            <Button size="small" color="warning">
+            <Button
+              size="small"
+              color="warning"
+              sx={{ minWidth: "12px" }}
+              onClick={() => handleStatusChange(index, "doing")}
+            >
               {status === "todo" ? (
                 <FontAwesomeIcon icon={faAnchor} className="button_icon" />
               ) : null}
             </Button>
           </Tooltip>
           <Tooltip title="Complete">
-            <Button size="small" color="success">
+            <Button
+              size="small"
+              color="success"
+              sx={{ minWidth: "12px" }}
+              onClick={() => handleStatusChange(index, "done")}
+            >
               {status === "done" ? null : (
                 <FontAwesomeIcon icon={faCheck} className="button_icon" />
               )}
             </Button>
           </Tooltip>
           <Tooltip title="Delete">
-            <Button size="small" color="error" sx={{ padding: "1px 3px" }}>
+            <Button
+              size="small"
+              color="error"
+              sx={{ minWidth: "12px" }}
+              onClick={() => handleDelete(index)}
+            >
               {" "}
               <FontAwesomeIcon icon={faTrashCan} className="button_icon" />
             </Button>
@@ -72,6 +93,9 @@ TaskCard.propTypes = {
     tags: PropTypes.array.isRequired,
   }).isRequired,
   status: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleStatusChange: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default TaskCard;

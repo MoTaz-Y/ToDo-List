@@ -15,6 +15,7 @@ const TaskForm = ({ setTasks }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setTasks((prev) => [...prev, taskData]);
+    setTaskData({ task: "", status: "todo", tags: [] });
   };
   const checkSelected = (tagName) => {
     return taskData.tags.includes(tagName);
@@ -37,6 +38,7 @@ const TaskForm = ({ setTasks }) => {
           <div className="task_form_top_line">
             <input
               type="text"
+              value={taskData.task}
               placeholder="Enter your task"
               className="task_input"
               name="task"
@@ -91,6 +93,7 @@ const TaskForm = ({ setTasks }) => {
               <select
                 name="status"
                 id="status"
+                value={taskData.status}
                 className="task_status"
                 onChange={handleTaskChange}
               >

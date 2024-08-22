@@ -27,7 +27,7 @@ const Tag = (props) => {
     Angular: {
       backgroundColor: "#d64c4c",
       border: "1px solid #dfe3e6",
-      color: "#000000",
+      color: "#fff",
     },
     Vue: {
       backgroundColor: "rgb(195 255 111)",
@@ -42,7 +42,7 @@ const Tag = (props) => {
     Python: {
       backgroundColor: "rgb(76 119 252)",
       border: "1px solid #dfe3e6",
-      color: "#000000",
+      color: "#fff",
     },
     default: {
       backgroundColor: "#f9f9f9",
