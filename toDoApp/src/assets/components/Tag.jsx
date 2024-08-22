@@ -50,10 +50,16 @@ const Tag = (props) => {
       color: "#000000",
     },
   };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    selected(tagName);
+  };
+
   return (
     <button
       className="tag"
-      onClick={() => selected(tagName)}
+      onClick={handleClick}
       style={selectTag ? tagStyle[tagName] : tagStyle.default}
     >
       {tagName}

@@ -1,13 +1,14 @@
 .app {
   display: grid;
   grid-template-rows: 150px auto;
+  height: 100vh;
 }
 
 .app-main {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-between;
+  align-items: top;
   padding: 20px 8%;
   flex-direction: row;
+  height: 80vh;
 }
-

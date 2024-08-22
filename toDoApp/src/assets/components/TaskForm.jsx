@@ -1,7 +1,8 @@
 import Tag from "./Tag";
 import "./taskform.css";
 import { useState } from "react";
-const TaskForm = () => {
+import PropTypes from "prop-types";
+const TaskForm = ({ setTasks }) => {
   const [taskData, setTaskData] = useState({
     task: "",
     status: "todo",
@@ -13,7 +14,7 @@ const TaskForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(taskData);
+    setTasks((prev) => [...prev, taskData]);
   };
   const checkSelected = (tagName) => {
     return taskData.tags.includes(tagName);
@@ -28,7 +29,6 @@ const TaskForm = () => {
     } else {
       setTaskData({ ...taskData, tags: [...taskData.tags, tagName] });
     }
-    console.log(taskData);
   };
   return (
     <div>
@@ -107,6 +107,10 @@ const TaskForm = () => {
       </header>
     </div>
   );
+};
+
+TaskForm.propTypes = {
+  setTasks: PropTypes.func.isRequired,
 };
 
 export default TaskForm;

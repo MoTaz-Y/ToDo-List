@@ -10,12 +10,14 @@ import { faAnchor } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
 import { Box, Tooltip } from "@mui/material";
 import Tag from "./Tag";
+import PropTypes from "prop-types";
 
-const TaskCard = () => {
+const TaskCard = ({ task, status }) => {
   return (
     <Card
       sx={{
-        minWidth: 375,
+        maxWidth: 500,
+        minWidth: 350,
         border: "1px solid #dfe3e6",
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
         borderRadius: "10px",
@@ -26,41 +28,50 @@ const TaskCard = () => {
     >
       <CardContent>
         <Typography variant="h5" component="div">
-          this is a simple text
+          {task.task}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
       </CardContent>
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="body2">
-          <Tag tagName="HTML" />
-          <Tag tagName="CSS" />
+          {task.tags.map((tag) => (
+            <Tag key={tag} tagName={tag} />
+          ))}
         </Typography>
         <CardActions>
+          <Tooltip title="Doing">
+            <Button size="small" color="warning">
+              {status === "todo" ? (
+                <FontAwesomeIcon icon={faAnchor} className="button_icon" />
+              ) : null}
+            </Button>
+          </Tooltip>
+          <Tooltip title="Complete">
+            <Button size="small" color="success">
+              {status === "done" ? null : (
+                <FontAwesomeIcon icon={faCheck} className="button_icon" />
+              )}
+            </Button>
+          </Tooltip>
           <Tooltip title="Delete">
             <Button size="small" color="error" sx={{ padding: "1px 3px" }}>
               {" "}
               <FontAwesomeIcon icon={faTrashCan} className="button_icon" />
             </Button>
           </Tooltip>
-          <Tooltip title="Doing">
-            <Button size="small" color="warning">
-              {" "}
-              <FontAwesomeIcon icon={faAnchor} className="button_icon" />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Complete">
-            <Button size="small" color="success">
-              {" "}
-              <FontAwesomeIcon icon={faCheck} className="button_icon" />
-            </Button>
-          </Tooltip>
         </CardActions>
       </Box>
     </Card>
   );
+};
+TaskCard.propTypes = {
+  task: PropTypes.shape({
+    task: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    tags: PropTypes.array.isRequired,
+  }).isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default TaskCard;
