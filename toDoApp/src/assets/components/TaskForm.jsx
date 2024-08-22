@@ -5,6 +5,7 @@ const TaskForm = () => {
   const [taskData, setTaskData] = useState({
     task: "",
     status: "todo",
+    tags: [],
   });
   const handleTaskChange = (event) => {
     const { name, value } = event.target;
@@ -14,24 +15,77 @@ const TaskForm = () => {
     e.preventDefault();
     console.log(taskData);
   };
+  const checkSelected = (tagName) => {
+    return taskData.tags.includes(tagName);
+  };
+
+  const selectTag = (tagName) => {
+    if (taskData.tags.includes(tagName)) {
+      setTaskData({
+        ...taskData,
+        tags: taskData.tags.filter((tag) => tag !== tagName),
+      });
+    } else {
+      setTaskData({ ...taskData, tags: [...taskData.tags, tagName] });
+    }
+    console.log(taskData);
+  };
   return (
     <div>
       <header className="app_header">
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter your task"
-            className="task_input"
-            name="task"
-            id="task"
-            onChange={handleTaskChange}
-          ></input>
+          <div className="task_form_top_line">
+            <input
+              type="text"
+              placeholder="Enter your task"
+              className="task_input"
+              name="task"
+              id="task"
+              onChange={handleTaskChange}
+            ></input>
+          </div>
           <div className="task_form_bottom_line">
             <div>
-              <Tag tagName="HTML" />
-              <Tag tagName="CSS" />
-              <Tag tagName="JavaScript" />
-              <Tag tagName="React" />
+              <Tag
+                tagName="HTML"
+                selected={selectTag}
+                selectTag={checkSelected("HTML")}
+              />
+              <Tag
+                tagName="CSS"
+                selected={selectTag}
+                selectTag={checkSelected("CSS")}
+              />
+              <Tag
+                tagName="JavaScript"
+                selected={selectTag}
+                selectTag={checkSelected("JavaScript")}
+              />
+              <Tag
+                tagName="React"
+                selected={selectTag}
+                selectTag={checkSelected("React")}
+              />
+              <Tag
+                tagName="Angular"
+                selected={selectTag}
+                selectTag={checkSelected("Angular")}
+              />
+              <Tag
+                tagName="Vue"
+                selected={selectTag}
+                selectTag={checkSelected("Vue")}
+              />
+              <Tag
+                tagName="Node"
+                selected={selectTag}
+                selectTag={checkSelected("Node")}
+              />
+              <Tag
+                tagName="Python"
+                selected={selectTag}
+                selectTag={checkSelected("Python")}
+              />
             </div>
             <div>
               <select
