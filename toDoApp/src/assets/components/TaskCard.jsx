@@ -12,13 +12,7 @@ import { Box, Tooltip } from "@mui/material";
 import Tag from "./Tag";
 import PropTypes from "prop-types";
 
-const TaskCard = ({
-  task,
-  status,
-  handleDelete,
-  handleStatusChange,
-  index,
-}) => {
+const TaskCard = ({ task, status, handleDelete, handleStatusChange }) => {
   return (
     <Card
       sx={{
@@ -51,7 +45,7 @@ const TaskCard = ({
               size="small"
               color="warning"
               sx={{ minWidth: "12px" }}
-              onClick={() => handleStatusChange(index, "doing")}
+              onClick={() => handleStatusChange(task.id, "doing")}
             >
               {status === "todo" ? (
                 <FontAwesomeIcon icon={faAnchor} className="button_icon" />
@@ -63,7 +57,7 @@ const TaskCard = ({
               size="small"
               color="success"
               sx={{ minWidth: "12px" }}
-              onClick={() => handleStatusChange(index, "done")}
+              onClick={() => handleStatusChange(task.id, "done")}
             >
               {status === "done" ? null : (
                 <FontAwesomeIcon icon={faCheck} className="button_icon" />
@@ -75,7 +69,7 @@ const TaskCard = ({
               size="small"
               color="error"
               sx={{ minWidth: "12px" }}
-              onClick={() => handleDelete(index)}
+              onClick={() => handleDelete(task.id)}
             >
               {" "}
               <FontAwesomeIcon icon={faTrashCan} className="button_icon" />
@@ -91,6 +85,7 @@ TaskCard.propTypes = {
     task: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     tags: PropTypes.array.isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
   status: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,

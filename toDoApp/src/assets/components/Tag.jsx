@@ -53,6 +53,7 @@ const Tag = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(tagName);
     selected(tagName);
   };
 

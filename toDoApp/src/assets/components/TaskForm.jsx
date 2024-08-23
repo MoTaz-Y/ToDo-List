@@ -2,8 +2,11 @@ import Tag from "./Tag";
 import "./taskform.css";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
+
 const TaskForm = ({ setTasks }) => {
   const [taskData, setTaskData] = useState({
+    id: "",
     task: "",
     status: "todo",
     tags: [],
@@ -12,9 +15,14 @@ const TaskForm = ({ setTasks }) => {
     const { name, value } = event.target;
     setTaskData({ ...taskData, [name]: value });
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setTasks((prev) => [...prev, taskData]);
+  //   setTaskData({ task: "", status: "todo", tags: [] });
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTasks((prev) => [...prev, taskData]);
+    setTasks((prev) => [...prev, { ...taskData, id: uuidv4() }]);
     setTaskData({ task: "", status: "todo", tags: [] });
   };
   const checkSelected = (tagName) => {
