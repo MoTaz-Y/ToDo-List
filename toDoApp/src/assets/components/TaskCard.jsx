@@ -16,8 +16,7 @@ const TaskCard = ({ task, status, handleDelete, handleStatusChange }) => {
   return (
     <Card
       sx={{
-        maxWidth: 500,
-        minWidth: 350,
+        width: 500,
         border: "1px solid #dfe3e6",
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
         borderRadius: "10px",

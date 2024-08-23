@@ -53,6 +53,22 @@ const TaskForm = ({ setTasks }) => {
               id="task"
               onChange={handleTaskChange}
             ></input>
+            <div>
+              <select
+                name="status"
+                id="status"
+                value={taskData.status}
+                className="task_status"
+                onChange={handleTaskChange}
+              >
+                <option value="todo">To do</option>
+                <option value="doing">In Progress</option>
+                <option value="done">Completed</option>
+              </select>
+              <button className="task_submit" type="submit">
+                + Add Task
+              </button>
+            </div>
           </div>
           <div className="task_form_bottom_line">
             <div>
@@ -96,22 +112,6 @@ const TaskForm = ({ setTasks }) => {
                 selected={selectTag}
                 selectTag={checkSelected("Python")}
               />
-            </div>
-            <div>
-              <select
-                name="status"
-                id="status"
-                value={taskData.status}
-                className="task_status"
-                onChange={handleTaskChange}
-              >
-                <option value="todo">To do</option>
-                <option value="doing">In Progress</option>
-                <option value="done">Completed</option>
-              </select>
-              <button className="task_submit" type="submit">
-                + Add Task
-              </button>
             </div>
           </div>
         </form>

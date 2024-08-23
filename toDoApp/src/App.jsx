@@ -33,12 +33,28 @@ const App = () => {
     const { source, destination } = result;
     console.log(source, destination);
     if (!destination) return;
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) {
+      return;
+    }
+    const [movedTask] = tasks.filter((task) => task.id === result.draggableId);
 
-    const [movedTask] = tasks.splice(source.index, 1);
+    const filteredTasks = tasks.filter(
+      (task) => task.id !== result.draggableId
+    );
+
+    // Update the status of the moved task
     movedTask.status = destination.droppableId;
-    tasks.splice(destination.index, 0, movedTask);
 
-    setTasks([...tasks]);
+    // Insert the task into the new location
+    const updatedTasks = [
+      ...filteredTasks.slice(0, destination.index),
+      movedTask,
+      ...filteredTasks.slice(destination.index),
+    ];
+    setTasks(updatedTasks);
   };
   console.log(tasks);
   return (

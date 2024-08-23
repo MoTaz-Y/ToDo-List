@@ -39,6 +39,8 @@ const TaskColumn = (props) => {
                 )}
               </Draggable>
             ))}
+
+          {provided.placeholder}
         </section>
       )}
     </Droppable>
